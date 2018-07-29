@@ -1,9 +1,10 @@
-import JWE from '../../src/codecs/JWE'
 import avaTest, { TestInterface } from 'ava'
-import CryptoCodec from '../../src/CryptoCodec'
 import * as jose from 'node-jose'
+import CryptoCodec from '../../src/CryptoCodec'
+import codecs from '../../src'
 
 const test = avaTest as TestInterface<{}>
+const { JWE } = codecs
 
 const testConfigs = [
   {

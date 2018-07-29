@@ -1,19 +1,15 @@
 import avaTest, { TestInterface } from 'ava'
-import cryptoCodecs from '../src/crypto-codecs'
+import codecs from '../src'
 
 const test = avaTest as TestInterface<{}>
 
 const expectedCodecs = ['JWE']
 
 test(`exports`, t => {
-  t.is(typeof cryptoCodecs, 'object', 'an object')
-  t.is(
-    Object.keys(cryptoCodecs).length,
-    expectedCodecs.length,
-    `with ${expectedCodecs.length} codecs`
-  )
+  t.is(typeof codecs, 'object', 'an object')
+  t.is(Object.keys(codecs).length, expectedCodecs.length, `with ${expectedCodecs.length} codecs`)
   expectedCodecs.forEach(codec => {
-    const cryptoCodec = cryptoCodecs[codec]
+    const cryptoCodec = codecs[codec]
     t.is(typeof cryptoCodec, 'function', `codec ${codec} exists`)
   })
 })
