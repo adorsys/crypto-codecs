@@ -3,7 +3,7 @@ import codecs from '../src'
 
 const test = avaTest as TestInterface<{}>
 
-const expectedCodecs = ['JWE']
+const expectedCodecs = ['jwe']
 
 test(`exports`, t => {
   t.is(typeof codecs, 'object', 'an object')

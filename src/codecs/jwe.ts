@@ -20,7 +20,7 @@ export interface Config {
   JWK?: JWK
 }
 
-export default function JWE(config: Config = {}): Promise<CryptoCodec> {
+export default function jwe(config: Config = {}): Promise<CryptoCodec> {
   return getKeystore(config.JWK)
     .then(getInstance)
     .catch(err => {

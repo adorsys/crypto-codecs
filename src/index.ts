@@ -1,5 +1,5 @@
-import JWE from '../src/codecs/JWE'
+import jwe from '../src/codecs/jwe'
 
 export default {
-  JWE
+  jwe
 }
