@@ -1,5 +1,15 @@
-import jwe from '../src/codecs/jwe'
+import jwe from './codecs/jwe'
+import jwk from './util/jwk'
+
+export const codecs = {
+  jwe
+}
+
+export const util = {
+  jwk
+}
 
 export default {
-  jwe
+  codecs,
+  util
 }

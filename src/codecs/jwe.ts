@@ -1,6 +1,7 @@
 import CryptoCodec from '../CryptoCodec'
 import * as jose from 'node-jose'
 import * as hydra from 'hydration'
+import UtilJwk from '../util/jwk'
 
 const keyDefaults = {
   kty: 'oct',
@@ -8,7 +9,7 @@ const keyDefaults = {
   alg: 'A256GCM'
 }
 
-export interface JWK {
+interface JWK {
   kty?: string
   kid?: string
   use?: string
@@ -16,7 +17,7 @@ export interface JWK {
   k: string
 }
 
-export interface Config {
+interface Config {
   JWK?: JWK
 }
 
@@ -35,10 +36,7 @@ export default function jwe(config: Config = {}): Promise<CryptoCodec> {
         return Promise.reject(new Error('bad key'))
       }
     }
-    const ks = jose.JWK.createKeyStore()
-    return ks
-      .generate('oct', 256, { alg: 'A256GCM', use: 'enc', kid: 'test-key' })
-      .then(() => ks.get('test-key').toJSON(true))
+    return UtilJwk.generate()
   }
 
   function checkKey(jwk: JWK) {
