@@ -17,21 +17,36 @@ npm install @adorsys/crypto-codecs
 
 ### Usage
 
-```js
-import codecs from 'crypto-codecs'
-...or
-const codecs = require('crypto-codecs')
 
-codecs.JWE()
+```js
+import { codecs, util } from 'crypto-codecs'
+// ...or
+const { codecs, util } = require('../src')
+
+// Without providing a key
+codecs.jwe()
   .then(codec => {
     codec.encrypt({test: 42})
-      .then(cipher => {
-        return codec.decrypt(cipher)
-      })
-      .then(value => return value) // {test: 42}
+      .then(cipher => codec.decrypt(cipher))
+      .then(value => value) // {test: 42}
   })
   .catch(err => console.log(err))
-```
+
+// With providing a key
+let Key
+util.jwk.generate()
+  .then(k => {
+    // remember key for later use
+    Key = k
+    return codecs.jwe({Key})
+  })
+  .then(codec => codec.encrypt({test: 42}))
+  .then(cipher => codecs.jwe({Key}).then(codec => codec.decrypt(cipher)))
+  .then(value => value) // {test: 42}
+  .catch(err => console.log(err))
+
+``` 
+
 
 ### Features
 
@@ -57,7 +72,7 @@ Made with :heart: by [gradorsys](https://github.com/gradorsys) and all these won
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| 
+| <img src="https://avatars.githubusercontent.com/u/1225651?v=3" width="100px;"/><br /><sub><b>Francis Pouatcha</b></sub><br />🤔 |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind are welcome!

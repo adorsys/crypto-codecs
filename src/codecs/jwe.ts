@@ -2,6 +2,7 @@ import CryptoCodec from '../CryptoCodec'
 import * as jose from 'node-jose'
 import * as hydra from 'hydration'
 import UtilJwk from '../util/jwk'
+import JsonWebKey from '../JsonWebKey'
 
 const keyDefaults = {
   kty: 'oct',
@@ -9,26 +10,18 @@ const keyDefaults = {
   alg: 'A256GCM'
 }
 
-interface JWK {
-  kty?: string
-  kid?: string
-  use?: string
-  alg?: string
-  k: string
-}
-
 interface Config {
-  JWK?: JWK
+  Key?: JsonWebKey
 }
 
 export default function jwe(config: Config = {}): Promise<CryptoCodec> {
-  return getKeystore(config.JWK)
+  return getKeystore(config.Key)
     .then(getInstance)
     .catch(err => {
       throw err
     })
 
-  function getKey(jwk?: JWK) {
+  function getKey(jwk?: JsonWebKey) {
     if (jwk) {
       if (checkKey(jwk)) {
         return Promise.resolve(Object.assign({}, keyDefaults, jwk))
@@ -39,7 +32,7 @@ export default function jwe(config: Config = {}): Promise<CryptoCodec> {
     return UtilJwk.generate()
   }
 
-  function checkKey(jwk: JWK) {
+  function checkKey(jwk: JsonWebKey) {
     return (
       jwk.kty === 'oct' &&
       jwk.alg === 'A256GCM' &&
@@ -48,7 +41,7 @@ export default function jwe(config: Config = {}): Promise<CryptoCodec> {
     )
   }
 
-  function getKeystore(jwk?: JWK) {
+  function getKeystore(jwk?: JsonWebKey) {
     const store = jose.JWK.createKeyStore()
     return getKey(jwk)
       .then(key => store.add(key, 'json'))

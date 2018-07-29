@@ -2,10 +2,10 @@ import * as jose from 'node-jose'
 
 export const jweConfigs = [
   {
-    JWK: { kty: 'EC', use: 'enc', alg: 'A256GCM', k: '1234567890123456789012345678901234567890123' }
+    Key: { kty: 'EC', use: 'enc', alg: 'A256GCM', k: '1234567890123456789012345678901234567890123' }
   },
   {
-    JWK: {
+    Key: {
       kty: 'oct',
       use: 'dec',
       alg: 'A256GCM',
@@ -13,13 +13,13 @@ export const jweConfigs = [
     }
   },
   {
-    JWK: { kty: 'oct', use: 'enc', alg: 'A128KW', k: '1234567890123456789012345678901234567890123' }
+    Key: { kty: 'oct', use: 'enc', alg: 'A128KW', k: '1234567890123456789012345678901234567890123' }
   },
   {
-    JWK: { kty: 'oct', use: 'enc', alg: 'A256GCM', k: '123456789012345678901234567890123456789012' }
+    Key: { kty: 'oct', use: 'enc', alg: 'A256GCM', k: '123456789012345678901234567890123456789012' }
   },
   {
-    JWK: {
+    Key: {
       kty: 'oct',
       use: 'enc',
       alg: 'A256GCM',

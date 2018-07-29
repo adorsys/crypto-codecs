@@ -27,7 +27,7 @@ jweValues.forEach((tv, i) => {
   })
 
   test(`testValue[${i}] encrypt/decrypt with config`, async t => {
-    const cryptoWithProvidedKey: CryptoCodec = await jwe({ JWK: await util.jwk.generate() })
+    const cryptoWithProvidedKey: CryptoCodec = await jwe({ Key: await util.jwk.generate() })
     const cipher = await cryptoWithProvidedKey.encrypt(tv)
     t.is(typeof cipher, 'string', 'encrypt gives string')
     const parts = cipher.split('.')
