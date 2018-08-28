@@ -11,10 +11,10 @@ const libraryName = 'crypto-codecs'
 
 export default {
   input: `src/index.ts`,
-  // input: `src/${libraryName}.ts`,
   output: [
-    { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true },
+    { file: pkg.main, format: 'cjs', sourcemap: true },
     { file: pkg.module, format: 'es', sourcemap: true },
+    { file: pkg.browser, format: 'iife', sourcemap: true, name: camelCase(libraryName) },
   ],
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
   external: [],

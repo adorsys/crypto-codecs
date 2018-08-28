@@ -3,8 +3,9 @@
   "version": "0.0.0-development",
   "description": "",
   "keywords": [],
-  "main": "dist/crypto-codecs.umd.js",
+  "main": "dist/crypto-codecs.cjs.js",
   "module": "dist/crypto-codecs.es5.js",
+  "browser": "dist/crypto-codecs.iife.js",
   "typings": "dist/types/crypto-codecs.d.ts",
   "files": [
     "dist"
